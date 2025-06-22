@@ -36,7 +36,8 @@ const Topbar = () => {
 			className="bg-white border-opacity-25 d-flex justify-content-end align-items-center"
 			style={{
 				height: "4.75vh",
-				width: "100%",
+				width: "auto",
+				minWidth: "92.5vw",
 			}}>
 			<article className="d-flex justify-content-between align-items-center px-3">
 				<ul className="d-flex gap-3 justify-content-end m-0 p-0 list-unstyled">

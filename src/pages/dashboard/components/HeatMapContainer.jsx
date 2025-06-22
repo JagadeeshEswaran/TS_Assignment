@@ -1,14 +1,16 @@
 import React from "react";
-import PlotlyHeatMap from "./PlotlyHeatMap";
-import RechartHeatMap from "./RechartHeatMap";
-import NivoHeatMap from "./NivoHeatMap";
 import ReactTableHeatmap from "./ReactTableHeatmap";
 
 const HeatMapContainer = ({ heatMapData }) => {
 	return (
 		<article
 			className="card border-0 bg-white rounded shadow-sm"
-			style={{ minHeight: "53.5vh", height: "auto" }}>
+			style={{
+				minHeight: "53.5vh",
+				height: "auto",
+				width: "auto",
+				maxWidth: "90vw",
+			}}>
 			<article className="card-header">
 				<span className="fw-semibold">Heat Map</span>
 				<br />
@@ -18,10 +20,7 @@ const HeatMapContainer = ({ heatMapData }) => {
 			</article>
 
 			<article>
-				{/* <PlotlyHeatMap heatMapData={heatMapData} /> */}
-				{/* <RechartHeatMap heatMapData={heatMapData} /> */}
-				{/* <NivoHeatMap data={heatMapData?.result} /> */}
-				<ReactTableHeatmap data={heatMapData?.result} />
+				<ReactTableHeatmap heatMapData={heatMapData?.result} />
 			</article>
 		</article>
 	);

@@ -9,11 +9,16 @@ const LineChart = () => {
 	return (
 		<article
 			className="card border-0 bg-white rounded shadow-sm"
-			style={{ height: "auto", maxHeight: "50vh" }}>
+			style={{
+				height: "auto",
+				maxHeight: "50vh",
+				width: "auto",
+				minWidth: "450px",
+			}}>
 			{/* CONTAINER HEADER */}
 			<article className="card-header bg-white d-flex flex-column flex-md-row justify-content-between">
 				{/* TITLE AND DESCRIPTION */}
-				<article className="mb-0 mb-sm-3">
+				<article className="mb-3 mb-md-0">
 					<span className="fw-semibold">Performance Chart</span>
 					<br />
 					<span style={{ fontSize: "14px" }} className="opacity-50">

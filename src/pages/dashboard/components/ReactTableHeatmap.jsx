@@ -1,68 +1,10 @@
 import React from "react";
+// import { heatMapData } from "../../../POSTMAN/Heatmap_Data";
 
 const getRandomInt = (min, max) =>
 	Math.floor(Math.random() * (max - min + 1)) + min;
 const getRandomFloat = (min, max, decimals = 2) =>
 	parseFloat((Math.random() * (max - min) + min).toFixed(decimals));
-
-const columns = [
-	{
-		Header: "Sunday",
-		columns: [
-			{ Header: "Imp", accessor: "sunday.imp" },
-			{ Header: "Clicks", accessor: "sunday.clicks" },
-			{ Header: "CPM", accessor: "sunday.cpm" },
-		],
-	},
-	{
-		Header: "Monday",
-		columns: [
-			{ Header: "Imp", accessor: "monday.imp" },
-			{ Header: "Clicks", accessor: "monday.clicks" },
-			{ Header: "CPM", accessor: "monday.cpm" },
-		],
-	},
-	{
-		Header: "Tuesday",
-		columns: [
-			{ Header: "Imp", accessor: "tuesday.imp" },
-			{ Header: "Clicks", accessor: "tuesday.clicks" },
-			{ Header: "CPM", accessor: "tuesday.cpm" },
-		],
-	},
-	{
-		Header: "Wednesday",
-		columns: [
-			{ Header: "Imp", accessor: "wednesday.imp" },
-			{ Header: "Clicks", accessor: "wednesday.clicks" },
-			{ Header: "CPM", accessor: "wednesday.cpm" },
-		],
-	},
-	{
-		Header: "Thursday",
-		columns: [
-			{ Header: "Imp", accessor: "thursday.imp" },
-			{ Header: "Clicks", accessor: "thursday.clicks" },
-			{ Header: "CPM", accessor: "thursday.cpm" },
-		],
-	},
-	{
-		Header: "Friday",
-		columns: [
-			{ Header: "Imp", accessor: "friday.imp" },
-			{ Header: "Clicks", accessor: "friday.clicks" },
-			{ Header: "CPM", accessor: "friday.cpm" },
-		],
-	},
-	{
-		Header: "Saturday",
-		columns: [
-			{ Header: "Imp", accessor: "saturday.imp" },
-			{ Header: "Clicks", accessor: "saturday.clicks" },
-			{ Header: "CPM", accessor: "saturday.cpm" },
-		],
-	},
-];
 
 const days = [
 	"sunday",
@@ -132,14 +74,127 @@ const getBgClr = (value, minValue, maxValue, hex) => {
 		color1.map((c, i) => Math.round(c * (1 - weight) + color2[i] * weight));
 
 	const base = hexToRgb(hex);
-	const lightTint = mix([255, 255, 255], base, 0.25); // 15% base + 85% white
-	const darkTint = mix(base, [0, 0, 0], 0.15); // 85% base + 15% black
+	const lightTint = mix([255, 255, 255], base, 0.05);
+	const darkTint = mix(base, [0, 0, 0], 0.05);
 
 	const blended = mix(lightTint, darkTint, percent); // Interpolate between light → dark
 	return `rgb(${blended[0]}, ${blended[1]}, ${blended[2]})`;
 };
 
-const ReactTableHeatmap = () => {
+const ReactTableHeatmap = ({ heatMapData }) => {
+	const sourceData = heatMapData
+		? [
+				0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+				20, 21, 22, 23,
+		  ].map((item, i) => ({
+				hour: `${i === 0 ? 12 : i > 12 ? i - 12 : i}${i < 12 ? "am" : "pm"}`,
+				sunday: {
+					CPC: heatMapData[0].Hourly_Data[i].CPC,
+					"CR%": heatMapData[0].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[0].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[0].Total_CPC,
+					Total_CR_perc: heatMapData[0].Total_CR_perc,
+					Total_ROAS: heatMapData[0].Total_ROAS,
+					min_CPC: heatMapData[0].min_CPC,
+					max_CPC: heatMapData[0].max_CPC,
+					min_CR_perc: heatMapData[0].min_CR_perc,
+					max_CR_perc: heatMapData[0].max_CR_perc,
+					min_ROAS: heatMapData[0].min_ROAS,
+					max_ROAS: heatMapData[0].max_ROAS,
+				},
+				monday: {
+					CPC: heatMapData[1].Hourly_Data[i].CPC,
+					"CR%": heatMapData[1].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[1].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[1].Total_CPC,
+					Total_CR_perc: heatMapData[1].Total_CR_perc,
+					Total_ROAS: heatMapData[1].Total_ROAS,
+					min_CPC: heatMapData[1].min_CPC,
+					max_CPC: heatMapData[1].max_CPC,
+					min_CR_perc: heatMapData[1].min_CR_perc,
+					max_CR_perc: heatMapData[1].max_CR_perc,
+					min_ROAS: heatMapData[1].min_ROAS,
+					max_ROAS: heatMapData[1].max_ROAS,
+				},
+				tuesday: {
+					CPC: heatMapData[2].Hourly_Data[i].CPC,
+					"CR%": heatMapData[2].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[2].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[2].Total_CPC,
+					Total_CR_perc: heatMapData[2].Total_CR_perc,
+					Total_ROAS: heatMapData[2].Total_ROAS,
+					min_CPC: heatMapData[2].min_CPC,
+					max_CPC: heatMapData[2].max_CPC,
+					min_CR_perc: heatMapData[2].min_CR_perc,
+					max_CR_perc: heatMapData[2].max_CR_perc,
+					min_ROAS: heatMapData[2].min_ROAS,
+					max_ROAS: heatMapData[2].max_ROAS,
+				},
+				wednesday: {
+					CPC: heatMapData[3].Hourly_Data[i].CPC,
+					"CR%": heatMapData[3].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[3].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[3].Total_CPC,
+					Total_CR_perc: heatMapData[3].Total_CR_perc,
+					Total_ROAS: heatMapData[3].Total_ROAS,
+					min_CPC: heatMapData[3].min_CPC,
+					max_CPC: heatMapData[3].max_CPC,
+					min_CR_perc: heatMapData[3].min_CR_perc,
+					max_CR_perc: heatMapData[3].max_CR_perc,
+					min_ROAS: heatMapData[3].min_ROAS,
+					max_ROAS: heatMapData[3].max_ROAS,
+				},
+				thursday: {
+					CPC: heatMapData[4].Hourly_Data[i].CPC,
+					"CR%": heatMapData[4].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[4].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[4].Total_CPC,
+					Total_CR_perc: heatMapData[4].Total_CR_perc,
+					Total_ROAS: heatMapData[4].Total_ROAS,
+					min_CPC: heatMapData[4].min_CPC,
+					max_CPC: heatMapData[4].max_CPC,
+					min_CR_perc: heatMapData[4].min_CR_perc,
+					max_CR_perc: heatMapData[4].max_CR_perc,
+					min_ROAS: heatMapData[4].min_ROAS,
+					max_ROAS: heatMapData[4].max_ROAS,
+				},
+				friday: {
+					CPC: heatMapData[5].Hourly_Data[i].CPC,
+					"CR%": heatMapData[5].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[5].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[5].Total_CPC,
+					Total_CR_perc: heatMapData[5].Total_CR_perc,
+					Total_ROAS: heatMapData[5].Total_ROAS,
+					min_CPC: heatMapData[5].min_CPC,
+					max_CPC: heatMapData[5].max_CPC,
+					min_CR_perc: heatMapData[5].min_CR_perc,
+					max_CR_perc: heatMapData[5].max_CR_perc,
+					min_ROAS: heatMapData[5].min_ROAS,
+					max_ROAS: heatMapData[5].max_ROAS,
+				},
+				saturday: {
+					CPC: heatMapData[6].Hourly_Data[i].CPC,
+					"CR%": heatMapData[6].Hourly_Data[i].CR_perc,
+					ROAS: heatMapData[6].Hourly_Data[i].ROAS,
+					Total_CPC: heatMapData[6].Total_CPC,
+					Total_CR_perc: heatMapData[6].Total_CR_perc,
+					Total_ROAS: heatMapData[6].Total_ROAS,
+					min_CPC: heatMapData[6].min_CPC,
+					max_CPC: heatMapData[6].max_CPC,
+					min_CR_perc: heatMapData[6].min_CR_perc,
+					max_CR_perc: heatMapData[6].max_CR_perc,
+					min_ROAS: heatMapData[6].min_ROAS,
+					max_ROAS: heatMapData[6].max_ROAS,
+				},
+		  }))
+		: [];
+
+	if (!heatMapData) {
+		return (
+			<p className="text-center mt-4 fs-4 fw-semibold opacity-25">No Data</p>
+		);
+	}
+
 	return (
 		<div className="table-responsive mx-2 my-3">
 			<table className="table text-center">
@@ -165,9 +220,9 @@ const ReactTableHeatmap = () => {
 								<div
 									className="d-flex gap-3 justify-content-between px-2 my-3 opacity-25"
 									style={{ fontSize: "12px" }}>
-									<div style={{ width: "3rem" }}>Imp</div>
-									<div style={{ width: "3rem" }}>Clicks</div>
-									<div style={{ width: "3rem" }}>CPM</div>
+									<div style={{ width: "3rem" }}>CPC</div>
+									<div style={{ width: "3rem" }}>CR%</div>
+									<div style={{ width: "3rem" }}>ROAS</div>
 								</div>
 							</th>
 						))}
@@ -214,53 +269,63 @@ const ReactTableHeatmap = () => {
 							</td>
 
 							{days.map((day) => {
-								const data = tableData[index][day];
+								const data = sourceData[index][day];
+
 								return (
-									<td key={day} className="m-0 p-0 px-1 border-0">
+									<td
+										key={day}
+										className="m-0 p-0 px-1 border-0"
+										style={{
+											width: "auto",
+											minWidth: "100px",
+											overflowX: "auto",
+										}}>
 										<div
 											className="d-flex justify-content-center align-items-center gap-1 border-0"
 											style={{ fontSize: "10px", whiteSpace: "nowrap" }}>
 											<div
 												style={{
 													backgroundColor: getBgClr(
-														data.imp,
-														data.maxImp,
-														data.minImp,
+														data.CPC,
+														data.max_CPC,
+														data.min_CPC,
 														"#C68EFD"
 													),
 													minWidth: "33%",
 													marginBottom: "2px",
 												}}
 												className="d-flex justify-content-center align-items-center h-100 py-2">
-												{Math.floor(data.imp / 100000).toLocaleString()}M
+												{Number(data.CPC.toFixed(2))}
 											</div>
+
 											<div
 												style={{
 													backgroundColor: getBgClr(
-														data.clicks,
-														data.maxClicks,
-														data.minClicks,
+														data["CR%"],
+														data.max_CR_perc,
+														data.min_CR_perc,
 														"#FF90BB"
 													),
 													minWidth: "33%",
 													marginBottom: "2px",
 												}}
 												className="d-flex justify-content-center align-items-center h-100 py-2">
-												{Math.floor(data.clicks / 1000).toLocaleString()}K
+												{data["CR%"].toFixed(2) + "%"}
 											</div>
+
 											<div
 												style={{
 													backgroundColor: getBgClr(
-														data.cpm,
-														data.maxCpm,
-														data.minCpm,
+														data.ROAS,
+														data.max_ROAS,
+														data.min_ROAS,
 														"#6FE6FC"
 													),
 													minWidth: "33%",
 													marginBottom: "2px",
 												}}
 												className="d-flex justify-content-center align-items-center h-100 py-2">
-												{"₹ " + data.cpm.toFixed(1)}
+												{data.ROAS.toFixed(2)}
 											</div>
 										</div>
 									</td>

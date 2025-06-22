@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import app_logo_icon from "../../assets/ts_logo_icon.svg";
 import app_logo from "../../assets/ts_logo_dark.svg";
 import { RiDashboard2Line } from "react-icons/ri";
@@ -6,13 +6,29 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
 	const [isExpanded, setIsExpanded] = useState(null);
+	const [vw, setVw] = useState(
+		Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+	);
+
+	useEffect(() => {
+		window.addEventListener("resize", () => {
+			setVw(
+				Math.max(
+					document.documentElement.clientWidth || 0,
+					window.innerWidth || 0
+				)
+			);
+		});
+	}, []);
 
 	return (
 		<aside
-			className={`bg-white shadow-sm ${isExpanded ? "border-end" : ""}`}
+			className={`d-none d-sm-block bg-white shadow-sm ${
+				isExpanded ? "border-end" : ""
+			}`}
 			style={{
 				maxWidth: "250px",
-				width: isExpanded ? "250px" : "70px",
+				width: vw > 575 && isExpanded ? "250px" : "70px",
 				transition: "width 0.3s ease",
 				overflowX: "hidden",
 				position: "fixed",

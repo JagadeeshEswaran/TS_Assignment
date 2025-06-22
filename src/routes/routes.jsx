@@ -28,10 +28,6 @@ const routes = createBrowserRouter([
 		element: <AuthenticateRoute />,
 		children: [
 			{
-				index: true,
-				element: <Root />,
-			},
-			{
 				path: "dashboard",
 				element: <Dashboard />,
 				loader: LineChartLoader,
