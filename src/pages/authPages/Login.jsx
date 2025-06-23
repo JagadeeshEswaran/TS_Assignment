@@ -42,11 +42,11 @@ const Login = () => {
       <article
         className="h-50 card text-dark d-flex flex-column justify-content-center align-items-center border border-3 border-secondary border-opacity-25 shadow rounded-4"
         style={{
-          width: "85%",
-          maxWidth: "500px",
+          width: "80%",
+          maxWidth: "425px",
         }}
       >
-        <h2 className="mb-4">Welcome Back</h2>
+        <h2 className="mb-2 text-secondary">Welcome Back</h2>
 
         {/* BOOTSTRAP FORM - FOR SIGN-IN */}
         <Form

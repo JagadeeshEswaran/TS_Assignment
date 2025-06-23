@@ -1,7 +1,7 @@
 import React from "react";
 import { Toast } from "react-bootstrap";
 
-const LoginSuccessToast = ({ variant, message }) => {
+const LogoutToast = ({ variant, message }) => {
   return (
     <Toast className="m-1 position-absolute end-0 bottom-0 mb-4 me-2">
       <Toast.Header>
@@ -18,4 +18,4 @@ const LoginSuccessToast = ({ variant, message }) => {
   );
 };
 
-export default LoginSuccessToast;
+export default LogoutToast;
