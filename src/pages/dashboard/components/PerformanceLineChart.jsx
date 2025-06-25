@@ -10,8 +10,19 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import CustomToolTip from "./CustomToolTip";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPerformanceChartData } from "../services/fetchPerformanceChartData";
 
-const PerformanceLineChart = ({ performanceData }) => {
+const PerformanceLineChart = () => {
+  const {
+    data: performanceData,
+    isLoading: loadingChart,
+    isError: errorChart,
+  } = useQuery({
+    queryKey: ["performanceChartData"],
+    queryFn: fetchPerformanceChartData,
+  });
+
   const preparedData = performanceData?.result?.categories.map((item, idx) => ({
     name: `${item.split(":")[0]?.trim()}hr`,
     [performanceData?.result?.series[0]?.name]:
@@ -21,6 +32,19 @@ const PerformanceLineChart = ({ performanceData }) => {
     [performanceData?.result?.series[2]?.name]:
       performanceData?.result?.series[2]?.data[idx],
   }));
+
+  if (loadingChart)
+    return (
+      <article
+        className=" d-flex justify-content-center align-items-center"
+        style={{ height: "300px" }}
+      >
+        <article className="spinner-border mb-5" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </article>
+      </article>
+    );
+  if (errorChart) return <article>Error fetching data</article>;
 
   return (
     <ResponsiveContainer width="100%" height={300}>

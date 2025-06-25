@@ -46,8 +46,8 @@ const AuthenticateRoute = () => {
           <Topbar />
         </article>
 
-        {
-          // LOADING SPINNER
+        {/* LOADING SPINNER */}
+        {/* {
           isPageLoading ? (
             <article className="w-100 h-100 d-flex justify-content-center align-items-center">
               <Spinner animation="border" variant="primary" />
@@ -55,7 +55,8 @@ const AuthenticateRoute = () => {
           ) : (
             <Outlet />
           )
-        }
+        } */}
+        <Outlet />
       </main>
     </section>
   ) : (

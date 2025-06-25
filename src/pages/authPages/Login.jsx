@@ -23,12 +23,12 @@ const Login = () => {
 
   return (
     <section
-      className="container-fluid w-100 d-flex flex-column justify-content-center align-items-center border border-black bg-light bg-opacity-75"
-      style={{ height: "100vh" }}
+      className="container-fluid w-100 d-flex flex-column justify-content-center align-items-center border border-black bg-light bg-opacity-50"
+      style={{ height: "auto", minHeight: "100vh" }}
     >
       {/* APP LOGO */}
       <article
-        className="position-absolute left-0 fw-semibold "
+        className="mb-3"
         style={{
           top: "4.5vh",
           fontSize: "4rem",
@@ -40,10 +40,12 @@ const Login = () => {
 
       {/* LOGIN FORM */}
       <article
-        className="h-50 card text-dark d-flex flex-column justify-content-center align-items-center border border-3 border-secondary border-opacity-25 shadow rounded-4"
+        className="card text-dark d-flex flex-column justify-content-center align-items-center border border-3 border-secondary border-opacity-25 shadow rounded-4"
         style={{
           width: "80%",
           maxWidth: "425px",
+          height: "auto",
+          minHeight: "400px",
         }}
       >
         <h2 className="mb-2 text-secondary">Welcome Back</h2>
@@ -68,7 +70,12 @@ const Login = () => {
         >
           {/* EMAIL INPUT */}
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label
+              className="fw-semibold opacity-75"
+              style={{ fontSize: "14px" }}
+            >
+              Email
+            </Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text
                 id="inputGroupPrepend"
@@ -80,6 +87,8 @@ const Login = () => {
                 type="text"
                 placeholder="Email ID or Username"
                 aria-describedby="inputGroupPrepend"
+                className="fw-semibold opacity-75"
+                style={{ fontSize: "15px" }}
                 value={data.email}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
                 required
@@ -95,7 +104,12 @@ const Login = () => {
             className="mb-3 position-relative"
             controlId="formBasicPassword"
           >
-            <Form.Label>Password</Form.Label>
+            <Form.Label
+              className="fw-semibold opacity-75"
+              style={{ fontSize: "14px" }}
+            >
+              Password
+            </Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Text
                 id="inputGroupPrepend"
@@ -107,6 +121,8 @@ const Login = () => {
                 type="password"
                 placeholder="Password"
                 aria-describedby="inputGroupPrepend"
+                className="fw-semibold opacity-75"
+                style={{ fontSize: "15px" }}
                 value={data.password}
                 onChange={(e) => setData({ ...data, password: e.target.value })}
                 required
@@ -134,27 +150,25 @@ const Login = () => {
               name="rememberMe"
               type="checkbox"
               label="Remember me"
-              className=""
+              className="fw-semibold opacity-75"
+              style={{ fontSize: "14px" }}
             />
           </Form.Group>
 
           {/* SIGN IN BUTTON */}
           {isLoading ? (
-            <article
-              className="w-100 d-flex justify-content-center align-items-center"
-              style={{ height: "4.5vh" }}
-            >
-              <Spinner
-                animation="border"
-                role="status"
-                variant="primary"
-                className="mx-auto text-center"
-              >
+            <article className=" d-flex justify-content-center align-items-center">
+              <article className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
-              </Spinner>
+              </article>
             </article>
           ) : (
-            <Button variant="primary" type="submit" className="w-100">
+            <Button
+              variant="primary"
+              type="submit"
+              className="w-100 fw-semibold"
+              style={{ fontSize: "14px" }}
+            >
               SIGN IN
             </Button>
           )}

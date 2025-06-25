@@ -1,4 +1,6 @@
 import React from "react";
+import { fetchHeatMapData } from "../services/fetchHeatMapData";
+import { useQuery } from "@tanstack/react-query";
 // import { heatMapData } from "../../../POSTMAN/Heatmap_Data";
 
 const getRandomInt = (min, max) =>
@@ -81,7 +83,30 @@ const getBgClr = (value, minValue, maxValue, hex) => {
   return `rgb(${blended[0]}, ${blended[1]}, ${blended[2]})`;
 };
 
-const ReactTableHeatmap = ({ heatMapData }) => {
+const ReactTableHeatmap = () => {
+  const {
+    data: heatMapData,
+    isLoading: loadingHeatMap,
+    isError: errorHeatMap,
+  } = useQuery({
+    queryKey: ["heatMapData"],
+    queryFn: fetchHeatMapData,
+  });
+
+  if (loadingHeatMap)
+    return (
+      <div
+        className=" d-flex justify-content-center align-items-center"
+        style={{ height: "300px" }}
+      >
+        <div className="spinner-border mb-5" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+
+  if (errorHeatMap) return <div>Error</div>;
+
   const sourceData = heatMapData
     ? [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -293,7 +318,7 @@ const ReactTableHeatmap = ({ heatMapData }) => {
                             data.CPC,
                             data.max_CPC,
                             data.min_CPC,
-                            "#C68EFD"
+                            "#FF2DF1"
                           ),
                           minWidth: "33%",
                           marginBottom: "2px",
@@ -309,7 +334,7 @@ const ReactTableHeatmap = ({ heatMapData }) => {
                             data["CR%"],
                             data.max_CR_perc,
                             data.min_CR_perc,
-                            "#FF90BB"
+                            "#F16767"
                           ),
                           minWidth: "33%",
                           marginBottom: "2px",
@@ -325,7 +350,7 @@ const ReactTableHeatmap = ({ heatMapData }) => {
                             data.ROAS,
                             data.max_ROAS,
                             data.min_ROAS,
-                            "#6FE6FC"
+                            "#00CAFF"
                           ),
                           minWidth: "33%",
                           marginBottom: "2px",
@@ -355,11 +380,12 @@ const ReactTableHeatmap = ({ heatMapData }) => {
                 {time}
               </td>
 
-              {days.map((day) => {
+              {days.map((day, idx) => {
                 const data = sourceData[index][day];
 
                 return (
                   <td
+                    key={day}
                     className="m-0 p-0 px-1 border-0"
                     style={{
                       width: "auto",
@@ -367,102 +393,43 @@ const ReactTableHeatmap = ({ heatMapData }) => {
                       overflowX: "auto",
                     }}
                   >
-                    <div>
-                      <td key={day} className="m-0 p-0  border-0">
-                        <div
-                          className="d-flex justify-content-center align-items-center gap-1 border-0"
-                          style={{ fontSize: "10px", whiteSpace: "nowrap" }}
-                        >
-                          <div
-                            style={{
-                              minWidth: "33%",
-                              width: "8.25rem",
-                              //   marginBottom: "2px",
-                            }}
-                            className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
-                          >
-                            {data.Total_CPC.toFixed(2)}
-                          </div>
+                    <div
+                      className="d-flex justify-content-center align-items-center gap-1 border-0"
+                      style={{ fontSize: "10px", whiteSpace: "nowrap" }}
+                    >
+                      <div
+                        style={{
+                          minWidth: "33%",
+                          width: "8.25rem",
+                        }}
+                        className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
+                      >
+                        {data.Total_CPC.toFixed(2)}
+                      </div>
 
-                          <div
-                            style={{
-                              minWidth: "33%",
-                              //   marginBottom: "2px",
-                            }}
-                            className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
-                          >
-                            {data.Total_CR_perc.toFixed(2)}%
-                          </div>
+                      <div
+                        style={{
+                          minWidth: "33%",
+                        }}
+                        className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
+                      >
+                        {data.Total_CR_perc.toFixed(2)}%
+                      </div>
 
-                          <div
-                            style={{
-                              minWidth: "33%",
-                              //   marginBottom: "2px",
-                            }}
-                            className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
-                          >
-                            {data.Total_ROAS.toFixed(2)}
-                          </div>
-                        </div>
-                      </td>
+                      <div
+                        style={{
+                          minWidth: "33%",
+                        }}
+                        className="d-flex justify-content-center align-items-center h-100 py-2 fw-semibold bg-dark bg-opacity-25"
+                      >
+                        {data.Total_ROAS.toFixed(2)}
+                      </div>
                     </div>
                   </td>
                 );
               })}
             </tr>
           ))}
-
-          {/* <tr className="border-top">
-            <td
-              style={{
-                backgroundColor: "#f8f9fa",
-                fontSize: "10px",
-                width: "8vw",
-                minWidth: "75px",
-              }}
-            >
-              Total
-            </td>
-
-            {days.map((day) => {
-              return (
-                <td key={day} className="m-0 p-0 px-1 border-0">
-                  <div
-                    className="d-flex justify-content-center align-items-center gap-1 border-0"
-                    style={{ fontSize: "10px", whiteSpace: "nowrap" }}
-                  >
-                    <div
-                      style={{
-                        minWidth: "33%",
-                        marginBottom: "2px",
-                      }}
-                      className="d-flex justify-content-center align-items-center h-100 py-2 bg-secondary bg-opacity-10"
-                    >
-                      {Math.floor(totalData.imp / 100000).toLocaleString()}M
-                    </div>
-                    <div
-                      style={{
-                        minWidth: "33%",
-                        marginBottom: "2px",
-                      }}
-                      className="d-flex justify-content-center align-items-center h-100 py-2 bg-secondary bg-opacity-10"
-                    >
-                      {Math.floor(totalData.clicks / 1000).toLocaleString()}K
-                    </div>
-                    <div
-                      style={{
-                        minWidth: "33%",
-                        marginBottom: "2px",
-                      }}
-                      className="d-flex justify-content-center align-items-center h-100 py-2 bg-secondary bg-opacity-10"
-                    >
-                      {"₹ " + totalData.cpm.toFixed(1)}
-                    </div>
-                  </div>
-                </td>
-              );
-            })}
-          </tr> */}
         </tbody>
       </table>
     </div>

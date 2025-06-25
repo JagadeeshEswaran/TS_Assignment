@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTableHeatmap from "./ReactTableHeatmap";
 
-const HeatMapContainer = ({ heatMapData }) => {
+const HeatMapContainer = () => {
   return (
     <article
       className="card border-0 bg-white rounded shadow-sm"
@@ -21,7 +21,7 @@ const HeatMapContainer = ({ heatMapData }) => {
       </article>
 
       <article>
-        <ReactTableHeatmap heatMapData={heatMapData?.result} />
+        <ReactTableHeatmap />
       </article>
     </article>
   );

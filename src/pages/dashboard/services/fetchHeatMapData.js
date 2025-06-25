@@ -20,13 +20,11 @@ export const fetchHeatMapData = async () => {
       }
     );
 
-    console.log(response);
-
     if (response.status !== 200) {
       throw new Error("Failed to fetch heat map data");
     }
 
-    return response.data;
+    return response.data.result;
   } catch (error) {
     console.error("Error fetching heat map data:", error);
     // throw error;

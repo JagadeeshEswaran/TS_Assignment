@@ -2,6 +2,10 @@ import { TS_AUTH_ENDPOINT } from "../../../axios/AppInstance";
 import { X_USER_IDENTITY } from "../../../constants/API_Constants";
 
 export const fetchPerformanceMetrics = async () => {
+  if (!sessionStorage.getItem("authToken")) {
+    return 401;
+  }
+
   try {
     const response = await TS_AUTH_ENDPOINT.post(
       "/day-parting/DayPartingFilterList",

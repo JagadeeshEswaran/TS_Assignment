@@ -43,7 +43,7 @@ export const handleFormSubmit = async (
       setToastVariant("failed");
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
 
     setShowToast(true);
     setToastMessage(
