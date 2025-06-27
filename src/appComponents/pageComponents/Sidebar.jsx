@@ -8,7 +8,7 @@ import { RiDashboard2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [vw, setVw] = useState(
     Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   );
