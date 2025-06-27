@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import app_logo_icon from "../../assets/ts_logo_icon.svg";
 import app_logo from "../../assets/ts_logo_dark.svg";
+import dashboard_icon_01 from "../../assets/dashboard_icon.svg";
+import sidebar_link1_icon from "../../assets/sidebar_link1_icon.svg";
+import sidebar_logo_full from "../../assets/sidebar_logo_full.png";
 import { RiDashboard2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(true);
   const [vw, setVw] = useState(
     Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   );
@@ -43,7 +46,7 @@ const Sidebar = () => {
         className={`d-flex justify-content-${
           isExpanded ? "start ms-3" : "center"
         } align-items-center mt-2`}
-        style={{ height: "6vh" }}
+        style={{ height: "62px" }}
       >
         {isExpanded ? (
           <Link
@@ -53,10 +56,10 @@ const Sidebar = () => {
             }}
           >
             <img
-              src={app_logo}
+              src={sidebar_logo_full}
               alt="App Logo"
               height={isExpanded ? 50 : 40}
-              className="mx-auto"
+              className=""
               style={{
                 transition: "0.2s width ease-in-out",
               }}
@@ -78,26 +81,37 @@ const Sidebar = () => {
 
       {/* NAVIGATION CONTAINER */}
       <article
-        className="d-flex justify-content-center align-items-center mt-2"
+        className="d-flex justify-content-center align-items-center mt-3"
         style={{ height: "6vh" }}
       >
         {!isExpanded ? (
-          <article className="d-flex gap-2 align-items-center">
+          <article
+            className="d-flex gap-2 align-items-center"
+            style={{ height: "36px", width: "40px" }}
+          >
             <Link
               to={"/dashboard"}
-              className="fs-2 text-light text-decoration-none d-flex justify-content-center align-items-center p-1 rounded-2 shadow-sm"
+              className="fs-2 text-decoration-none d-flex justify-content-center align-items-center p-1 rounded-2 shadow-sm"
               style={{
                 backgroundColor: "#471396",
+                color: "#D0D5DD",
+                height: "36px",
+                width: "40px",
               }}
             >
-              <RiDashboard2Line />
+              <img
+                src={sidebar_link1_icon}
+                alt="Dashboard Icon"
+                width={22}
+                style={{ color: "#D0D5DD" }}
+              />
             </Link>
           </article>
         ) : (
           <article
             className="d-flex gap-2 align-items-center text-light rounded p-1 ps-2"
             style={{
-              backgroundColor: "#FFDFEF",
+              backgroundColor: " #F6F0FF",
               color: "#471396",
               width: "90%",
             }}
@@ -106,15 +120,14 @@ const Sidebar = () => {
               to={"/dashboard"}
               className="fs-4 text-decoration-none d-flex justify-content-center align-items-center p-1 rounded-2"
               style={{
-                backgroundColor: "#FFDFEF",
-                color: "#471396",
+                color: "#5208A5",
               }}
             >
-              <RiDashboard2Line />
+              <img src={dashboard_icon_01} alt="Dashboard Icon" />
             </Link>
             <p
               className="fw-semibold m-0 text-opacity-50"
-              style={{ color: "#471396", fontSize: "14px" }}
+              style={{ color: "#5208A5", fontSize: "14px" }}
             >
               Dashboard
             </p>

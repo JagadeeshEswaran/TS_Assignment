@@ -34,13 +34,17 @@ const Topbar = () => {
 
   return (
     <section
-      className="bg-white border-opacity-25 d-flex justify-content-end align-items-center"
+      className="bg-white border-opacity-25 d-flex justify-content-between align-items-center"
       style={{
-        height: "4.75vh",
+        height: "50px",
         width: "auto",
         minWidth: "92.5vw",
       }}
     >
+      <article className="ms-3 my-auto">
+        <p className="w-100 m-0 fw-semibold">Dashboard</p>
+      </article>
+
       <article className="d-flex justify-content-between align-items-center px-3">
         <ul className="d-flex gap-3 justify-content-end m-0 p-0 list-unstyled">
           {topBarLinks.map((link) => (
