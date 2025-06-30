@@ -42,7 +42,13 @@ const Topbar = () => {
       }}
     >
       <article className="ms-3 my-auto">
-        <p className="w-100 m-0 fw-semibold">Dashboard</p>
+        <p className="w-100 m-0 fw-semibold" style={{ fontSize: "16px" }}>
+          {location.href.includes("dashboard")
+            ? "Dashboard"
+            : location.href.split("/").pop(1).toLocaleUpperCase() === ""
+            ? "Home"
+            : location.href.split("/").pop(1).toLocaleUpperCase()}
+        </p>
       </article>
 
       <article className="d-flex justify-content-between align-items-center px-3">

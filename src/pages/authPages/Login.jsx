@@ -44,12 +44,12 @@ const Login = () => {
         <article
           className="position-absolute"
           style={{
-            top: "80px",
+            top: "65px",
             translateX: "-50%",
           }}
         >
           {/* TECHSAVVY */}
-          <img src={ts_full_logo} alt="" height={50} />
+          <img src={ts_full_logo} alt="" height={60} />
         </article>
 
         {/* LOGIN FORM */}
@@ -183,21 +183,24 @@ const Login = () => {
 
             {/* REMEMBER ME CHECKBOX */}
             <Form.Group
-              className="mb-3 w-100 d-flex justify-content-end bord"
+              className="mb-3 w-100 d-flex justify-content-end"
               controlId="formBasicCheckbox"
             >
               <Form.Check
                 name="rememberMe"
                 type="checkbox"
                 label="Remember me"
-                className="fw-semibold"
-                style={{ fontSize: "14px" }}
+                className="opacity-75"
+                style={{ fontSize: "12px", color: "#303030" }}
               />
             </Form.Group>
 
             {/* SIGN IN BUTTON */}
             {isLoading ? (
-              <article className=" d-flex justify-content-center align-items-center">
+              <article
+                className=" d-flex justify-content-center align-items-center"
+                style={{ color: "#5932EA" }}
+              >
                 <article className="spinner-border" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </article>
@@ -205,7 +208,7 @@ const Login = () => {
             ) : (
               <Button
                 type="submit"
-                className="w-100"
+                className="w-100 "
                 style={{
                   fontSize: "13px",
                   background: " #5932EA",

@@ -41,7 +41,7 @@ const LineChart = () => {
           loadingMetrics ? (
             <article
               className=" d-flex justify-content-center align-items-center"
-              style={{ height: "300px" }}
+              style={{ height: "300px", color: "#5932EA" }}
             >
               <article className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>

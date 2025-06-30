@@ -50,7 +50,7 @@ const Sidebar = () => {
       >
         {isExpanded ? (
           <Link
-            to={"/"}
+            to={"/dashboard"}
             style={{
               transition: "0.2s width ease-in-out",
             }}
@@ -66,7 +66,7 @@ const Sidebar = () => {
             />
           </Link>
         ) : (
-          <Link to={"/"}>
+          <Link to={"/dashboard"}>
             <img
               src={app_logo_icon}
               alt="App Logo"
@@ -108,7 +108,8 @@ const Sidebar = () => {
             </Link>
           </article>
         ) : (
-          <article
+          <Link
+            to={"/dashboard"}
             className="d-flex gap-2 align-items-center text-light rounded p-1 ps-2"
             style={{
               backgroundColor: " #F6F0FF",
@@ -116,22 +117,21 @@ const Sidebar = () => {
               width: "90%",
             }}
           >
-            <Link
-              to={"/dashboard"}
+            <article
               className="fs-4 text-decoration-none d-flex justify-content-center align-items-center p-1 rounded-2"
               style={{
                 color: "#5208A5",
               }}
             >
               <img src={dashboard_icon_01} alt="Dashboard Icon" />
-            </Link>
+            </article>
             <p
               className="fw-semibold m-0 text-opacity-50"
               style={{ color: "#5208A5", fontSize: "14px" }}
             >
               Dashboard
             </p>
-          </article>
+          </Link>
         )}
       </article>
     </aside>

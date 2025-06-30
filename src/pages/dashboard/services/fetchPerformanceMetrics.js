@@ -8,7 +8,7 @@ export const fetchPerformanceMetrics = async () => {
 
   try {
     const response = await TS_AUTH_ENDPOINT.post(
-      "/day-parting/DayPartingFilterList",
+      "/day-parting/DayPartingFilterLists",
       {
         type: "customizeMetrics",
       },
@@ -31,13 +31,8 @@ export const fetchPerformanceMetrics = async () => {
     const data = await response.data;
     return data;
   } catch (error) {
-    // console.error("Error fetching performance metrics:", error);
-
     if (error.response.status === 401) {
-      console.log("Logging out due to 401 error");
       return 401;
     }
-
-    // throw error;
   }
 };

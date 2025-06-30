@@ -26,7 +26,7 @@ export const fetchHeatMapData = async () => {
 
     return response.data.result;
   } catch (error) {
-    console.error("Error fetching heat map data:", error);
-    // throw error;
+    // console.error("Error fetching heat map data:", error);
+    throw error;
   }
 };

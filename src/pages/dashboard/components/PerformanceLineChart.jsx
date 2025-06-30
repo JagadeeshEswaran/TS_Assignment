@@ -36,66 +36,77 @@ const PerformanceLineChart = () => {
   if (loadingChart)
     return (
       <article
-        className=" d-flex justify-content-center align-items-center"
-        style={{ height: "300px" }}
+        className="mx-auto d-flex justify-content-center align-items-center"
+        style={{ height: "300px", color: "#5932EA" }}
       >
         <article className="spinner-border mb-5" role="status">
           <span className="visually-hidden">Loading...</span>
         </article>
       </article>
     );
-  if (errorChart) return <article>Error fetching data</article>;
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart
-        data={preparedData}
-        margin={{
-          top: 5,
-          right: 5,
-          left: 5,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" style={{ fontSize: "10px", fontWeight: "400" }} />
-        <YAxis
-          yAxisId="left"
-          orientation="left"
-          style={{ fontSize: "10px", fontWeight: "400" }}
-        />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          style={{ fontSize: "10px", fontWeight: "400" }}
-        />
-        <Tooltip content={<CustomToolTip />} />
-        <Line
-          yAxisId="left"
-          type="monotone"
-          dataKey={performanceData?.result?.series[0]?.name}
-          stroke="#8884d8"
-          fill="#8884d8"
-          activeDot={{ r: 8 }}
-          strokeWidth={3}
-        />
-        <Line
-          yAxisId="right"
-          type="monotone"
-          dataKey={performanceData?.result?.series[1]?.name}
-          stroke="#82ca9d"
-          fill="green"
-          strokeWidth={3}
-        />
-        <Line
-          yAxisId="right"
-          type="monotone"
-          dataKey={performanceData?.result?.series[2]?.name}
-          stroke="orange"
-          fill="orange"
-          strokeWidth={3}
-        />
-      </LineChart>
+      {errorChart || !preparedData ? (
+        <article
+          className="text-danger fw-semibold my-auto mx-auto d-flex justify-content-center align-items-center h-75"
+          style={{ fontSize: "12px" }}
+        >
+          Error fetching data
+        </article>
+      ) : (
+        <LineChart
+          data={preparedData}
+          margin={{
+            top: 5,
+            right: 5,
+            left: 5,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            dataKey="name"
+            style={{ fontSize: "10px", fontWeight: "400" }}
+          />
+          <YAxis
+            yAxisId="left"
+            orientation="left"
+            style={{ fontSize: "10px", fontWeight: "400" }}
+          />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            style={{ fontSize: "10px", fontWeight: "400" }}
+          />
+          <Tooltip content={<CustomToolTip />} />
+          <Line
+            yAxisId="left"
+            type="monotone"
+            dataKey={performanceData?.result?.series[0]?.name}
+            stroke="#8884d8"
+            fill="#8884d8"
+            activeDot={{ r: 8 }}
+            strokeWidth={3}
+          />
+          <Line
+            yAxisId="right"
+            type="monotone"
+            dataKey={performanceData?.result?.series[1]?.name}
+            stroke="#82ca9d"
+            fill="green"
+            strokeWidth={3}
+          />
+          <Line
+            yAxisId="right"
+            type="monotone"
+            dataKey={performanceData?.result?.series[2]?.name}
+            stroke="orange"
+            fill="orange"
+            strokeWidth={3}
+          />
+        </LineChart>
+      )}
     </ResponsiveContainer>
   );
 };

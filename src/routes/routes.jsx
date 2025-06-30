@@ -11,14 +11,14 @@ const routes = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-  //   {
-  //     path: "/signup",
-  //     element: <Signup />,
-  //   },
-  //   {
-  //     path: "/forget-password",
-  //     element: <ForgetPassword />,
-  //   },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/forget-password",
+    element: <ForgetPassword />,
+  },
   {
     path: "/",
     element: <AuthenticateRoute />,
@@ -27,8 +27,13 @@ const routes = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "*",
+        element: <PageNotFound />,
+      },
     ],
   },
+  // HANDLING UNDEFINED ROUTES
   {
     path: "*",
     element: <PageNotFound />,
