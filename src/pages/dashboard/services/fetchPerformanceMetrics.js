@@ -8,7 +8,7 @@ export const fetchPerformanceMetrics = async () => {
 
   try {
     const response = await TS_AUTH_ENDPOINT.post(
-      "/day-parting/DayPartingFilterLists",
+      "/day-parting/DayPartingFilterList",
       {
         type: "customizeMetrics",
       },
