@@ -294,8 +294,8 @@ const ReactTableHeatmap = () => {
                           style={{
                             backgroundColor: getBgClr(
                               data.ROAS,
-                              data.max_ROAS,
                               data.min_ROAS,
+                              data.max_ROAS,
                               "#90DEF3"
                             ),
                             minWidth: "33%",
